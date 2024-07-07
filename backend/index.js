@@ -8,7 +8,11 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 connectToMongo();
-app.use(cors())
+
+const corsOptions = {
+  origin:"https://yourbook-frontend.onrender.com",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",};
+app.use(cors(corsOptions));
 
 app.use(express.json())
 
