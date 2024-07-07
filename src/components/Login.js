@@ -11,7 +11,7 @@ const Login = (props) => {
 
     const handleSumit = async (e) => {
         e.preventDefault();
-        const response = await fetch(`https://yourbook-c17h.onrender.com`, {
+        const response = await fetch(`https://yourbook-c17h.onrender.com/api/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
