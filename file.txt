@@ -1,0 +1,3 @@
+{
+  "authtoken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjYzNmE0MjZhNjM3YmNhZDliYmJhZDU1In0sImlhdCI6MTcxNjE0NjI4NX0.GmGPB0elOZvG-kPC5p4tA28d_oDhiUehFRnjY9WS1R8"
+}
