@@ -2,6 +2,8 @@ import React,{useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const Signup = (props) => {
+    let [loading, setloading] = useState(false)
+
   const [credentials, setcredentials] = useState({name:"", email: "", password: "",cpasswod: "" })
     let navigate = useNavigate()
 
@@ -12,6 +14,8 @@ const Signup = (props) => {
     const handleSumit = async (e) => {
       const {name,email,password} = credentials;
         e.preventDefault();
+        setloading(true);
+
         const response = await fetch(`https://yourbook-c17h.onrender.com/api/auth/createuser`, {
             method: 'POST',
             headers: {
@@ -23,10 +27,12 @@ const Signup = (props) => {
         // console.log(json);
         if(json.success){
             localStorage.setItem("token", json.authtoken);
+            setloading(false)
             navigate("/")
             props.showAlert("Account Created Successfully", "success")
         }else{
             props.showAlert("Input fields required", "danger")
+            setloading(false)
         }
     }
   return (
@@ -49,7 +55,10 @@ const Signup = (props) => {
           <label htmlFor="cpassword">Confirm Password</label>
           <input type="password" name="cpassword" className="form-control" id="cpassword" onChange={onChange} minLength={5} required autoComplete='off' placeholder="Confirm Password"/>
         </div>
+         {
+          (loading)? <Spinner/>:
         <button type="submit" className="btn btn-primary">Sign Up</button>
+        }
       </form>
     </div>
   )
