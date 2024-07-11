@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 const Login = (props) => {
+        let [loading, setloading] = useState(false);
     const [credentials, setcredentials] = useState({ email: "", password: "" })
     let navigate = useNavigate()
 
@@ -11,6 +12,8 @@ const Login = (props) => {
 
     const handleSumit = async (e) => {
         e.preventDefault();
+                setloading(true);
+
         const response = await fetch(`https://yourbook-c17h.onrender.com/api/auth/login`, {
             method: 'POST',
             headers: {
@@ -24,10 +27,13 @@ const Login = (props) => {
         if(json.success){
             localStorage.setItem("token", json.authtoken);
             props.showAlert("Login successful", "success")
+           setloading(false)
             navigate("/")
 
         }else{
             props.showAlert("Invalid credientials","danger")
+            setloading(false)
+
         }
     }
     return (
@@ -44,7 +50,7 @@ const Login = (props) => {
                     <input type="password" className="form-control" id="password" value={credentials.password} onChange={onChange} name='password' autoComplete='off' placeholder="Password" />
                 </div>
 
-                <button type="submit" className="btn btn-primary">Login</button>
+               {(loading)?<Spinner/>: <button type="submit" className="btn btn-primary">Login</button>}
             </form>
             </div>
         </>
