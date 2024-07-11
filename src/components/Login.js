@@ -1,5 +1,7 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import Spinner from './Spinner'
+
 
 const Login = (props) => {
         let [loading, setloading] = useState(false);
